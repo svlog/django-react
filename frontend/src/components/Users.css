@@ -1,0 +1,24 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #0f0a0a;
+  font-weight: bold;
+}
+
+td {
+  text-align: left;
+}
+
+td:nth-child(1) {
+  text-align: center;
+}
