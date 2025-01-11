@@ -2,23 +2,33 @@ import api from "../api/api";
 
 class UserService {
   getUsers = async () => {
-    const response = await api().get("/users/get-users/");
-    return response.data;
+    try {
+      const response = await api.get("/users/");
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      throw error;
+    }
   };
 
   createUser = async (data) => {
-    const response = await api().post("/users/create-users/", data);
-    return response.data;
-  };
-
-  updateUser = async (id, data) => {
-    const response = await api().put(`/users/update-users/${id}/`, data);
-    return response.data;
+    try {
+      const response = await api.post("/users/", data);
+      return response.data;
+    } catch (error) {
+      console.error("Error creating user:", error);
+      throw error;
+    }
   };
 
   deleteUser = async (id) => {
-    const response = await api().delete(`/users/delete-users/${id}/`);
-    return response.data;
+    try {
+      const response = await api.delete(`/users/${id}/`);
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      throw error;
+    }
   };
 }
 

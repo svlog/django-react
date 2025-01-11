@@ -1,7 +1,6 @@
-// src/components/RoutesConfig.js
 import { Routes, Route, Link } from "react-router-dom";
-import Users from "../components/Users";
-import AddUser from "../components/AddUser";
+import Login from "../login/Login";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 const RoutesConfig = () => {
   return (
@@ -9,25 +8,24 @@ const RoutesConfig = () => {
       <Route
         path="/"
         element={
-          <div>
-            <h1 className="text-center">Django Backend / React</h1>
-            <p className="text-center">
-              This is a Django backend with a React frontend.
-            </p>
-            <p className="text-center">
+          <div className="centered-container">
+            <h1>Django Backend / React</h1>
+            <p>This is a Django backend with a React frontend.</p>
+            <p>
               The Django backend is running on port 8000 and the React frontend
               is running on port 3000.
             </p>
-            <div className="text-center">
-              <Link to="/users" className="btn btn-primary">
-                Go to Users
+            <div>
+              <Link to="/login" className="btn btn-primary">
+                Login
               </Link>
             </div>
           </div>
         }
       />
-      <Route path="/users" element={<Users />} />
-      <Route path="/add-user" element={<AddUser />} />
+
+      <Route path="/login" element={<Login />} />
+      <Route path="/*" element={<ProtectedRoutes />} />
     </Routes>
   );
 };

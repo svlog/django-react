@@ -10,7 +10,9 @@ import "./Users.css";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState("");
+
+  const navigate = useNavigate();
 
   const getUsers = async () => {
     try {
@@ -27,8 +29,6 @@ const Users = () => {
     getUsers();
   }, []);
 
-  const navigate = useNavigate();
-
   const handleUserAction = async (action, id) => {
     switch (action) {
       case "add":
@@ -40,6 +40,7 @@ const Users = () => {
         try {
           await UserService.deleteUser(id);
           toast.success("User deleted successfully!");
+          setSelectedUsers("");
           getUsers();
         } catch (error) {
           console.error(error);
@@ -80,6 +81,7 @@ const Users = () => {
               <th>ID</th>
               <th>Username</th>
               <th>Email</th>
+              <th>Staff</th>
             </tr>
           </thead>
           <tbody>
@@ -95,12 +97,12 @@ const Users = () => {
                 <td>{user.id}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
+                <td>{user.is_staff ? "Yes" : "No"}</td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-
       {!loading && users.length > 0 && <p>Total users: {users.length}</p>}
 
       <div
@@ -135,7 +137,6 @@ const Users = () => {
           Edit User
         </Button>
       </div>
-
       <Button
         style={{ marginTop: "10px" }}
         variant="contained"

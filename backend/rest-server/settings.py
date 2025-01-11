@@ -40,9 +40,17 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
+    "rest_framework_simplejwt",
+    "django_prometheus",
     "drf_yasg",
     "users",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -109,6 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "auth.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -131,6 +140,7 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
